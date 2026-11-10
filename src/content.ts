@@ -1,3 +1,4 @@
+export const siteName = 'TrabalhoSalalimpa';
 export const people = ['Paulo', 'Maria', 'Brenda', 'Victor', 'Lucas', 'Iohana'] as const;
 export const residueKeys = ['papers', 'packages', 'pencil', 'cups', 'bottles'] as const;
 export const residueLabels = ['Papéis', 'Embalagens', 'Pontas de lápis', 'Copos descartáveis', 'Garrafas plásticas'];
@@ -11,7 +12,7 @@ export type Content = {
 export type SpeechVersions = Record<string, number>;
 export type Published = { content: Content; version: number; speechVersions: SpeechVersions; updatedAt: number | null; updatedBy: { uid: string; name: string } };
 export const defaultContent: Content = {
-  hero: { title: 'SALA LIMPA', subtitle: 'Pequenas atitudes, grandes mudanças.', description: 'Nosso objetivo é incentivar os alunos do Ensino Fundamental a manter as salas limpas, organizadas e agradáveis para todos.', cta: 'Conheça nosso projeto' },
+  hero: { title: siteName, subtitle: 'Pequenas atitudes, grandes mudanças.', description: 'Nosso objetivo é incentivar os alunos do Ensino Fundamental a manter as salas limpas, organizadas e agradáveis para todos.', cta: 'Conheça nosso projeto' },
   awareness: ['Lugar de lixo é na lixeira.', 'Uma sala limpa é melhor para aprender.', 'Cuidar da escola é responsabilidade de todos.'],
   members: people.map((name) => ({ name, role: name === 'Paulo' ? 'Organizador' : name === 'Maria' ? 'Administradora e organizadora' : 'Integrante' })),
   speeches: [

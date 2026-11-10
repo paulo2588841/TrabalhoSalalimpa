@@ -1,4 +1,4 @@
-# Configuração do Firebase — SALA LIMPA 1.0
+# Configuração do Firebase — TrabalhoSalalimpa 1.0
 
 **Este exemplar já tem o projeto real `sala-limpa-10-32aef5`, app Web, banco, regras, domínios autorizados e provedor de e-mail/senha configurados. Paulo e Maria já têm permissões ativas e confirmaram o acesso ao painel.** O guia [ATIVAR_ADMINISTRADORES.md](ATIVAR_ADMINISTRADORES.md) documenta a manutenção dos acessos. As etapas abaixo permanecem como referência para recriar a configuração em outro projeto.
 

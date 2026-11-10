@@ -1,8 +1,10 @@
-# Relatório de entrega — SALA LIMPA 1.0
+# Relatório de entrega — TrabalhoSalalimpa 1.0
 
 Verificação realizada em 9 de novembro de 2026, em Windows, com Node.js 24.22.1, npm 11.6.2, Java 27 e Microsoft Edge em execução automatizada sem janela. O projeto está em `E:\TRABALHO\sala-limpa`.
 
 ## Resultado implementado
+
+Atualização de identidade: nome público e repositório alterados para **TrabalhoSalalimpa**, com novo caminho do GitHub Pages. Após a alteração, os 19 testes de componentes/lógica e a compilação passaram novamente. A verificação de navegador foi repetida em 1440, 768, 390 e 320 px, sem rolagem horizontal, erros JavaScript ou violações nas verificações automáticas de acessibilidade selecionadas. O título publicado no Firestore recebeu uma nova versão com histórico atômico e verificação de versão, preservando os demais campos.
 
 Portal público, gráfico e tabela acessível, seis integrantes e falas com **Victor** corrigido, apresentação com navegação, prévia local identificada, Firebase Authentication, Firestore com `onSnapshot`, painel administrativo, edição colaborativa com pausa de 550 ms, bloqueio de fala, rascunhos pendentes, controle de versões e histórico restaurável. O workflow de GitHub Pages e o guia de configuração estão incluídos.
 
@@ -24,7 +26,7 @@ Portal público, gráfico e tabela acessível, seis integrantes e falas com **Vi
 | Administradores reais | Documentos de Paulo e Maria conferidos com `active` booleano verdadeiro; responsável confirmou o login individual das duas contas no painel |
 | Publicação administrativa real | Versão 1 de `published/content` observada no Firestore com autoria de Paulo após sua publicação pelo painel |
 | Domínios de Authentication | `paulo2588841.github.io`, `localhost` e `127.0.0.1` autorizados e confirmados por releitura, preservando os domínios existentes |
-| GitHub Actions | Instalação, testes, regras, build e deploy aprovados na execução [42738908838](https://github.com/paulo2588841/sala-limpa/actions/runs/42738908838) |
+| GitHub Actions | Instalação, testes, regras, build e deploy aprovados na execução [42738908838](https://github.com/paulo2588841/TrabalhoSalalimpa/actions/runs/42738908838) |
 | Site publicado | HTTP 200, Firebase sincronizado, tela de login disponível e largura móvel de 390 px sem rolagem horizontal ou erros JavaScript |
 
 Neste ambiente o npm foi executado pela sua CLI local em `.tools/package/bin/npm-cli.js`, pois o executável npm não estava no PATH. Os scripts do projeto continuam sendo os comandos npm convencionais. Os emuladores foram iniciados pela Firebase CLI; na rodada final os testes foram executados contra os serviços já ativos. Os comandos `npm run test:rules` e `npm run test:live` incluem essa inicialização para repetição em outro computador.
@@ -45,7 +47,7 @@ Os relatórios locais de navegador e integração estão em `qa/browser-report.j
 ## Limites e etapas manuais
 
 1. **Firebase de produção configurado.** Projeto `sala-limpa-10-32aef5`, app Web, banco Standard em `southamerica-east1`, regras e provedor de e-mail/senha foram criados. O banco confirmou cota gratuita elegível e atualizações em tempo real habilitadas. O faturamento não foi vinculado. O responsável criou manualmente as contas de Paulo e Maria e seus documentos `admins/{uid}`; as duas permissões foram conferidas. O passo a passo permanece em `ATIVAR_ADMINISTRADORES.md` para manutenção.
-2. **GitHub Pages publicado e verificado.** O repositório público `paulo2588841/sala-limpa` recebeu o código, as seis variáveis Firebase foram cadastradas e o workflow concluiu build e deploy com sucesso. O endereço é `https://paulo2588841.github.io/sala-limpa/`. As atualizações seguintes podem ser acompanhadas na aba Actions.
+2. **GitHub Pages publicado e verificado.** O repositório público `paulo2588841/TrabalhoSalalimpa` recebeu o código, as seis variáveis Firebase foram cadastradas e o workflow concluiu build e deploy com sucesso. O endereço é `https://paulo2588841.github.io/TrabalhoSalalimpa/`. As atualizações seguintes podem ser acompanhadas na aba Actions.
 3. A integração completa das duas contas foi verificada nos emuladores. No Firebase de produção, foram verificados leitura pública por dois clientes, `onSnapshot`, bloqueio de escrita anônima, proteção do histórico, provedor de senha, documentos administrativos e domínios autorizados. **O responsável confirmou o login de Paulo e Maria, e a primeira publicação de Paulo foi observada no banco real.** A edição simultânea em dois dispositivos físicos na rede da escola ainda deve ser conferida; não foi declarada como executada.
 4. A auditoria completa do npm ainda reporta **14 alertas moderados em dependências de desenvolvimento transitivas**. Não há alertas altos ou críticos após a atualização aplicada, e a auditoria de produção retornou zero. Não foi feito downgrade automático de ferramentas nem aplicado `audit fix --force`.
 5. A verificação de acessibilidade automática não equivale a uma auditoria manual completa com leitores de tela. A apresentação foi testada como diálogo ocupando o viewport; a API de tela cheia exclusiva do navegador não foi exercitada automaticamente.

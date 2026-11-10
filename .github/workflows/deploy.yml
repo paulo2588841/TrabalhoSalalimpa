@@ -1,4 +1,4 @@
-name: Publicar SALA LIMPA
+name: Publicar TrabalhoSalalimpa
 on:
   push:
     branches: [main]

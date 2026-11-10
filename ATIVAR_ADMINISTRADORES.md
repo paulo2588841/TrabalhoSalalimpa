@@ -1,4 +1,4 @@
-# Ativar Paulo e Maria — SALA LIMPA
+# Ativar Paulo e Maria — TrabalhoSalalimpa
 
 O projeto Firebase `sala-limpa-10-32aef5` já foi criado. O banco Standard em São Paulo, as regras e o login por e-mail e senha estão configurados. O conteúdo inicial já está publicado, com as cinco contagens ainda não informadas.
 
@@ -40,11 +40,11 @@ localhost
 127.0.0.1
 ```
 
-Digite somente os hostnames, sem `https://`, porta ou `/sala-limpa/`.
+Digite somente os hostnames, sem `https://`, porta ou `/TrabalhoSalalimpa/`.
 
 ## 4. Entrar no painel
 
-Depois de a publicação terminar, abra [a área do grupo](https://paulo2588841.github.io/sala-limpa/#/admin) e entre com o e-mail e a senha criados para Paulo ou Maria.
+Depois de a publicação terminar, abra [a área do grupo](https://paulo2588841.github.io/TrabalhoSalalimpa/#/admin) e entre com o e-mail e a senha criados para Paulo ou Maria.
 
 Na primeira edição, o botão **Publicar conteúdo inicial** registra a primeira versão do histórico com a autoria da conta conectada. Depois escolha uma fala, clique **Editar ao vivo**, altere o texto e pause por pelo menos 550 ms. Outra janela sem login deve receber o texto automaticamente.
 

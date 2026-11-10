@@ -1,10 +1,12 @@
-# SALA LIMPA — publicação
+# TrabalhoSalalimpa — publicação
 
-- **Site:** https://paulo2588841.github.io/sala-limpa/
-- **Painel:** https://paulo2588841.github.io/sala-limpa/#/admin
-- **Código:** https://github.com/paulo2588841/sala-limpa
-- **Primeira publicação aprovada:** https://github.com/paulo2588841/sala-limpa/actions/runs/42738908838
+- **Site:** https://paulo2588841.github.io/TrabalhoSalalimpa/
+- **Painel:** https://paulo2588841.github.io/TrabalhoSalalimpa/#/admin
+- **Código:** https://github.com/paulo2588841/TrabalhoSalalimpa
+- **Primeira publicação aprovada:** https://github.com/paulo2588841/TrabalhoSalalimpa/actions/runs/42738908838
 - **Projeto Firebase:** `sala-limpa-10-32aef5`
+
+O nome público foi alterado para **TrabalhoSalalimpa**, incluindo cabeçalho, título principal, rodapé, modo de apresentação e aba do navegador. O repositório e o caminho do GitHub Pages usam `TrabalhoSalalimpa`. Compartilhe o endereço novo; o caminho antigo do GitHub Pages não tem redirecionamento garantido. O projeto Firebase e o hostname autorizado continuam sendo os mesmos.
 
 O GitHub Actions executou instalação, testes de componentes, testes das regras no emulador, compilação e publicação com sucesso. O site publicado respondeu HTTP 200, exibiu **Sincronizado**, abriu a tela de login e foi conferido em largura móvel de 390 px sem rolagem horizontal ou erros JavaScript.
 

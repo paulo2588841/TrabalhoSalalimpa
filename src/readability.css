@@ -1,5 +1,8 @@
 /* Contraste e leitura em telas pequenas, sem depender de fontes remotas. */
 :root{color:#173d42}
+.brand{min-width:0}.brand-name{min-width:0;white-space:normal;overflow-wrap:anywhere;line-height:1.15}
+.site-header .brand-icon,.site-header .admin-link,.site-header .mobile-menu,.presentation header>div{flex-shrink:0}
+.hero h1.project-title{font-size:clamp(54px,6.2vw,82px);letter-spacing:-4px;line-height:1.02}
 h1,h2,h3,h4,p{overflow-wrap:anywhere}
 .hero h1{color:#103c49}.hero .title-dot{color:#103c49}
 .brand-icon{background:#0e4c54}
@@ -29,6 +32,9 @@ label{font-size:12px}input,textarea{font-size:14px}
 .history-list strong{font-size:12px}.history-list p{font-size:11px}
 .research-meta{font-size:9px}.hero-footnote{font-size:10px}
 @media(max-width:760px){
+  .hero h1.project-title{font-size:clamp(46px,12vw,70px);letter-spacing:-2.5px}
+  .site-header .brand{font-size:15px}
+  .presentation header .brand{font-size:14px}
   .hero-visual{overflow:clip}
   .hero-copy>p{font-size:13px}
   .section-heading>p,.research-copy>p,.presentation-intro{font-size:12px}
