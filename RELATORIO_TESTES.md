@@ -21,6 +21,8 @@ Portal público, gráfico e tabela acessível, seis integrantes e falas com **Vi
 | `npm audit --omit=dev` | **0 vulnerabilidades reportadas** nas dependências de produção |
 | Firestore real, projeto `sala-limpa-10-32aef5` | Dois visitantes anônimos receberam o conteúdo inicial por `onSnapshot`; escrita anônima e leitura do histórico negadas |
 | Authentication real | Provedor de e-mail/senha confirmado com tentativa de login de teste sem criação de usuário |
+| GitHub Actions | Instalação, testes, regras, build e deploy aprovados na execução [42738908838](https://github.com/paulo2588841/sala-limpa/actions/runs/42738908838) |
+| Site publicado | HTTP 200, Firebase sincronizado, tela de login disponível e largura móvel de 390 px sem rolagem horizontal ou erros JavaScript |
 
 Neste ambiente o npm foi executado pela sua CLI local em `.tools/package/bin/npm-cli.js`, pois o executável npm não estava no PATH. Os scripts do projeto continuam sendo os comandos npm convencionais. Os emuladores foram iniciados pela Firebase CLI; na rodada final os testes foram executados contra os serviços já ativos. Os comandos `npm run test:rules` e `npm run test:live` incluem essa inicialização para repetição em outro computador.
 
@@ -40,7 +42,7 @@ Os relatórios locais de navegador e integração estão em `qa/browser-report.j
 ## Limites e etapas manuais
 
 1. **Firebase de produção configurado.** Projeto `sala-limpa-10-32aef5`, app Web, banco Standard em `southamerica-east1`, regras e provedor de e-mail/senha foram criados. O banco confirmou cota gratuita elegível e atualizações em tempo real habilitadas. O faturamento não foi vinculado. As contas de Paulo e Maria e seus documentos `admins/{uid}` ficam para criação manual no Console, conforme solicitado; o passo a passo está em `ATIVAR_ADMINISTRADORES.md`.
-2. **Publicação GitHub preparada.** O repositório público `paulo2588841/sala-limpa` foi criado e as seis variáveis Firebase foram cadastradas no GitHub Actions. A execução mais recente do workflow, incluindo o resultado da publicação, pode ser consultada na aba Actions do repositório.
+2. **GitHub Pages publicado e verificado.** O repositório público `paulo2588841/sala-limpa` recebeu o código, as seis variáveis Firebase foram cadastradas e o workflow concluiu build e deploy com sucesso. O endereço é `https://paulo2588841.github.io/sala-limpa/`. As atualizações seguintes podem ser acompanhadas na aba Actions.
 3. A integração completa das duas contas foi verificada nos emuladores. No Firebase de produção, foram verificados leitura pública por dois clientes, `onSnapshot`, bloqueio de escrita anônima, proteção do histórico e disponibilidade do provedor de senha. **O login dos administradores reais e dois dispositivos físicos ainda dependem da criação manual das contas e da conferência na escola.**
 4. A auditoria completa do npm ainda reporta **14 alertas moderados em dependências de desenvolvimento transitivas**. Não há alertas altos ou críticos após a atualização aplicada, e a auditoria de produção retornou zero. Não foi feito downgrade automático de ferramentas nem aplicado `audit fix --force`.
 5. A verificação de acessibilidade automática não equivale a uma auditoria manual completa com leitores de tela. A apresentação foi testada como diálogo ocupando o viewport; a API de tela cheia exclusiva do navegador não foi exercitada automaticamente.

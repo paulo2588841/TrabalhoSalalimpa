@@ -4,6 +4,8 @@ Portal escolar sobre o cuidado com as salas do Ensino Fundamental. React, TypeSc
 
 Este exemplar está conectado ao projeto Firebase `sala-limpa-10-32aef5`. O repositório é [paulo2588841/sala-limpa](https://github.com/paulo2588841/sala-limpa), e o endereço de publicação do workflow é [paulo2588841.github.io/sala-limpa](https://paulo2588841.github.io/sala-limpa/). Para ativar o acesso de Paulo e Maria, siga [ATIVAR_ADMINISTRADORES.md](ATIVAR_ADMINISTRADORES.md).
 
+A [primeira publicação foi concluída e verificada](PUBLICACAO.md). O site usa o Firebase real; o comando `npm run demo` mantém uma prévia independente para testes locais.
+
 ## Rodar localmente
 
 Requer Node.js 22.12+ e npm. Para os testes de regras, instale Java 21+.
