@@ -1,0 +1,48 @@
+/* Contraste e leitura em telas pequenas, sem depender de fontes remotas. */
+:root{color:#173d42}
+h1,h2,h3,h4,p{overflow-wrap:anywhere}
+.hero h1{color:#103c49}.hero .title-dot{color:#103c49}
+.brand-icon{background:#0e4c54}
+.closing-card{background:#0d3540}
+.hero-copy>p{font-size:14px;max-width:390px}
+.section-heading>p,.presentation-intro,.research-copy>p{font-size:13px}
+.principle p,.speech-card>p{font-size:12px;line-height:1.85}
+.principle p{min-height:68px}
+.principle-bottom{font-size:8px}
+.member>p{font-size:10px}
+.member-tag{font-size:7px}
+.speech-state{font-size:9px}
+.empty-chart p{font-size:12px}
+.empty-badge{font-size:9px}
+.chart-update{font-size:9px}
+.hero-copy>p,.section-heading>p,.principle p,.research-copy>p,.research-note,.research-meta,.member>p,.speech-card>p,.presentation-intro,.live-preview,.muted,.admin-heading p,.admin-section-heading p,.reset-row p,.login-card>p,.demo-notice p,.history-list p{color:#5c7055}
+.principle-bottom,.member-index,.member-tag,.speech-number,.speech-state,.empty-chart p,.empty-badge,.chart-update,.hero-footnote,.art-coordinate,.chart-heading .eyebrow,.speech-header>div>span,.live-editor h3 small,.editor-help>span,.live-editor-heading .eyebrow{color:#5b7351}
+.section-heading h2>span{color:#60765b}
+.status-demo,.status-missing,.status-connecting{color:#6a612f}
+.principle-top,.step-number,.admin-summary{color:#526b48}
+.illustration-note div>span{color:#5f7359;font-size:9px}
+.empty-chart h4{font-size:13px;line-height:1.5}
+.site-footer{color:#5e7354}.site-footer small{color:#64795a}
+.feedback{font-size:12px}
+label{font-size:12px}input,textarea{font-size:14px}
+.live-preview{font-size:12px}.text-button{font-size:11px}
+.history-list strong{font-size:12px}.history-list p{font-size:11px}
+.research-meta{font-size:9px}.hero-footnote{font-size:10px}
+@media(max-width:760px){
+  .hero-visual{overflow:clip}
+  .hero-copy>p{font-size:13px}
+  .section-heading>p,.research-copy>p,.presentation-intro{font-size:12px}
+  .principle p{min-height:0;font-size:12px}
+  .speech-card>p{font-size:12px}
+  .speech-grid{grid-template-columns:1fr}
+  .speech-header h3{font-size:14px}.speech-header>div>span{font-size:10px}
+  .speech-avatar{width:35px;height:35px}
+  .member>p{font-size:9px}.member-tag{font-size:6px}
+  .empty-badge{font-size:8px;line-height:1.6}
+  .research-meta{font-size:8px}
+  input,textarea{font-size:16px}
+  .button-small{min-height:40px}
+  .editor-help>span{font-size:10px}.editor-help .text-button{font-size:10px}
+  .site-footer>span,.site-footer small,.site-footer>div>p{font-size:9px}
+  .main-nav a{min-height:42px}
+}

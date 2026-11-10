@@ -1,0 +1,96 @@
+{
+  "content": {
+    "hero": {
+      "title": "SALA LIMPA",
+      "subtitle": "Pequenas atitudes, grandes mudanças.",
+      "description": "Nosso objetivo é incentivar os alunos do Ensino Fundamental a manter as salas limpas, organizadas e agradáveis para todos.",
+      "cta": "Conheça nosso projeto"
+    },
+    "awareness": [
+      "Lugar de lixo é na lixeira.",
+      "Uma sala limpa é melhor para aprender.",
+      "Cuidar da escola é responsabilidade de todos."
+    ],
+    "members": [
+      {
+        "name": "Paulo",
+        "role": "Organizador"
+      },
+      {
+        "name": "Maria",
+        "role": "Administradora e organizadora"
+      },
+      {
+        "name": "Brenda",
+        "role": "Integrante"
+      },
+      {
+        "name": "Victor",
+        "role": "Integrante"
+      },
+      {
+        "name": "Lucas",
+        "role": "Integrante"
+      },
+      {
+        "name": "Iohana",
+        "role": "Integrante"
+      }
+    ],
+    "speeches": [
+      {
+        "name": "Paulo",
+        "topic": "Abertura",
+        "text": "Bom dia! Nosso grupo vai apresentar um trabalho sobre o lixo nas salas do Ensino Fundamental. Nosso objetivo é mostrar a importância de manter o ambiente escolar limpo."
+      },
+      {
+        "name": "Maria",
+        "topic": "O problema",
+        "text": "Quando os alunos jogam papéis e embalagens no chão, a sala fica suja e desorganizada. Isso prejudica o ambiente que todos utilizamos."
+      },
+      {
+        "name": "Brenda",
+        "topic": "Consequências",
+        "text": "O lixo acumulado pode causar mau cheiro, atrair insetos e deixar o ambiente desagradável. Por isso, precisamos cuidar da limpeza."
+      },
+      {
+        "name": "Victor",
+        "topic": "Gráfico",
+        "text": "Neste gráfico, mostramos os tipos de resíduos encontrados nas salas. Com os resultados da pesquisa, podemos identificar qual deles aparece com mais frequência."
+      },
+      {
+        "name": "Lucas",
+        "topic": "Soluções",
+        "text": "Para melhorar essa situação, devemos usar as lixeiras, evitar desperdícios e recolher os materiais que caírem no chão."
+      },
+      {
+        "name": "Iohana",
+        "topic": "Encerramento",
+        "text": "Concluímos que manter a escola limpa depende da colaboração de todos. Pequenas atitudes fazem uma grande diferença. Obrigado pela atenção!"
+      }
+    ],
+    "residues": {
+      "papers": null,
+      "packages": null,
+      "pencil": null,
+      "cups": null,
+      "bottles": null
+    }
+  },
+  "version": 0,
+  "speechVersions": {
+    "s0": 0,
+    "s1": 0,
+    "s2": 0,
+    "s3": 0,
+    "s4": 0,
+    "s5": 0
+  },
+  "updatedAt": null,
+  "updatedBy": {
+    "uid": "",
+    "name": "Conteúdo inicial"
+  },
+  "schemaVersion": 1,
+  "historyId": "initial-console"
+}

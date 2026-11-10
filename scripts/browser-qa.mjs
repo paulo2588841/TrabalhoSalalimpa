@@ -1,0 +1,51 @@
+import { chromium } from 'playwright';
+import AxeBuilder from '@axe-core/playwright';
+import { mkdir, writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const url = process.env.QA_URL || 'http://127.0.0.1:5173/';
+const executablePath = process.env.QA_BROWSER_PATH;
+await mkdir('qa', { recursive: true });
+const browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
+const context = await browser.newContext();
+const page = await context.newPage();
+const errors = []; page.on('pageerror', e => errors.push(e.message));
+const results = [];
+try {
+  for (const width of [1440, 768, 390, 320]) {
+    await page.setViewportSize({ width, height: 950 }); await page.goto(url); await page.evaluate(() => document.fonts.ready);
+    await page.getByRole('heading', { name: 'Dados da pesquisa ainda não informados' }).waitFor();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+    assert.equal(overflow, false, `Overflow em ${width}px`);
+    await page.screenshot({ path: `qa/home-${width}.png`, fullPage: true }); results.push({ viewport: width, overflow });
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByRole('button', { name: 'Abrir menu' }).click();
+  await page.getByRole('navigation').getByRole('link', { name: 'A equipe' }).click();
+  assert.equal(await page.getByRole('button', { name: 'Abrir menu' }).getAttribute('aria-expanded'), 'false');
+  await page.getByRole('button', { name: /Iniciar apresentação/ }).click();
+  await page.getByRole('heading', { name: /^Paulo\s*\.$/ }).waitFor(); await page.keyboard.press('ArrowRight'); await page.getByRole('heading', { name: /^Maria\s*\.$/ }).waitFor();
+  await page.screenshot({ path: 'qa/presentation-mobile.png' });
+  await page.keyboard.press('Escape'); assert.equal(await page.locator('dialog[open]').count(), 0);
+  const publicA11y = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+  await page.goto(`${url}#/admin`); await page.getByRole('button', { name: 'Explorar prévia local' }).click();
+  await page.getByLabel('Subtítulo', { exact: true }).fill('Uma mudança começa na nossa sala.');
+  await page.getByLabel('Papéis', { exact: true }).fill('12'); await page.getByLabel('Embalagens', { exact: true }).fill('0');
+  await page.getByRole('button', { name: 'Publicar conteúdo inicial' }).click();
+  await page.getByText(/Nenhum dado foi enviado ao Firebase/).waitFor();
+  assert.equal(await page.getByText('Textos gerais atualizados', { exact: true }).count(), 1);
+  await page.screenshot({ path: 'qa/admin-mobile.png', fullPage: true });
+  const adminA11y = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+  await page.getByRole('link', { name: 'Voltar ao site' }).click();
+  await page.getByRole('heading', { name: 'Uma mudança começa na nossa sala.' }).waitFor();
+  await page.getByText('Ver dados em tabela acessível').click();
+  assert.equal(await page.getByRole('cell', { name: '12', exact: true }).count(), 1);
+  assert.equal(await page.getByRole('cell', { name: '0', exact: true }).count(), 1);
+  await page.locator('#pesquisa').screenshot({ path: 'qa/chart-mobile.png' });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const duration = await page.locator('.hero-copy').evaluate(e => getComputedStyle(e).animationDuration);
+  assert.equal(duration, '0s');
+  const report = { results, errors, publicAccessibility: publicA11y.violations.map(v => ({ id:v.id, impact:v.impact, description:v.description, nodes:v.nodes.map(n => ({target:n.target, summary:n.failureSummary})) })), adminAccessibility: adminA11y.violations.map(v => ({id:v.id, impact:v.impact, nodes:v.nodes.map(n => ({target:n.target, summary:n.failureSummary}))})), interactions:'menu, apresentação, teclado, edição local, gráfico, zero vs null, movimento reduzido' };
+  await writeFile('qa/browser-report.json', JSON.stringify(report,null,2)); console.log(JSON.stringify(report,null,2));
+  assert.equal(errors.length, 0, 'Erros de JavaScript');
+  assert.equal(publicA11y.violations.length + adminA11y.violations.length, 0, 'Corrija as violações de acessibilidade');
+} finally { await browser.close(); }

@@ -1,0 +1,107 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function admin() {
+      return request.auth != null
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.active == true
+        && get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.name in ['Paulo', 'Maria'];
+    }
+    function text(v, max) { return v is string && v.size() <= max && v.matches('(?s).*[^\\s].*'); }
+    function number(v) { return v == null || (v is int && v >= 0 && v <= 1000000); }
+    function member(v, name) { return v.keys().hasOnly(['name', 'role']) && v.name == name && text(v.role, 100); }
+    function speech(v, name) { return v.keys().hasOnly(['name', 'topic', 'text']) && v.name == name && text(v.topic, 100) && text(v.text, 2000); }
+    function content(c) {
+      let h = c.hero;
+      let a = c.awareness;
+      let r = c.residues;
+      return c.keys().hasOnly(['hero','awareness','members','speeches','residues'])
+        && h.keys().hasOnly(['title','subtitle','description','cta'])
+        && text(h.title,60) && text(h.subtitle,160) && text(h.description,800) && text(h.cta,60)
+        && a is list && a.size() == 3 && text(a[0],200) && text(a[1],200) && text(a[2],200)
+        && c.members is list && c.members.size() == 6 && c.speeches is list && c.speeches.size() == 6
+        && r.keys().hasOnly(['papers','packages','pencil','cups','bottles'])
+        && number(r.papers) && number(r.packages) && number(r.pencil) && number(r.cups) && number(r.bottles);
+    }
+    // As duas metades são obrigatórias na mesma transação: o conteúdo valida
+    // textos gerais e contagens; o histórico idêntico valida integrantes e falas.
+    // Isso mantém cada avaliação abaixo do limite de 1000 expressões do Firestore.
+    function allParticipants(c) {
+      let m = c.members;
+      let s = c.speeches;
+      return m is list && m.size() == 6 && s is list && s.size() == 6
+        && member(m[0],'Paulo') && member(m[1],'Maria') && member(m[2],'Brenda') && member(m[3],'Victor') && member(m[4],'Lucas') && member(m[5],'Iohana')
+        && speech(s[0],'Paulo') && speech(s[1],'Maria') && speech(s[2],'Brenda') && speech(s[3],'Victor') && speech(s[4],'Lucas') && speech(s[5],'Iohana');
+    }
+    function speechChange(next, previous, name) { return next == previous || speech(next, name); }
+    function participants(c) {
+      let path = /databases/$(database)/documents/published/content;
+      let previous = exists(path) ? get(path).data.content : null;
+      let m = c.members;
+      let s = c.speeches;
+      return previous == null ? allParticipants(c) : (
+        m is list && m.size() == 6 && s is list && s.size() == 6
+        && (m == previous.members || (member(m[0],'Paulo') && member(m[1],'Maria') && member(m[2],'Brenda') && member(m[3],'Victor') && member(m[4],'Lucas') && member(m[5],'Iohana')))
+        && speechChange(s[0],previous.speeches[0],'Paulo') && speechChange(s[1],previous.speeches[1],'Maria') && speechChange(s[2],previous.speeches[2],'Brenda') && speechChange(s[3],previous.speeches[3],'Victor') && speechChange(s[4],previous.speeches[4],'Lucas') && speechChange(s[5],previous.speeches[5],'Iohana')
+      );
+    }
+    function actor(a) { return a.keys().hasOnly(['uid','name']) && a.uid == request.auth.uid && a.name == get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.name; }
+    function valid(d) {
+      return d.keys().hasOnly(['schemaVersion','content','version','speechVersions','updatedAt','updatedBy','historyId'])
+        && d.schemaVersion == 1 && d.content.keys().hasOnly(['hero','awareness','members','speeches','residues']) && d.speechVersions.keys().hasOnly(['s0','s1','s2','s3','s4','s5']) && d.version is int && d.version > 0
+        && d.updatedAt == request.time && actor(d.updatedBy) && d.historyId is string && d.historyId.size() <= 100;
+    }
+    function ownsLock(id) {
+      let lock = get(/databases/$(database)/documents/editing/$(id)).data;
+      return lock.uid == request.auth.uid && lock.expiresAt > request.time;
+    }
+    function changeAllowed(i, key, id) {
+      let next = request.resource.data;
+      let old = resource.data;
+      let changed = next.content.speeches[i] != old.content.speeches[i];
+      return next.speechVersions[key] == old.speechVersions[key] + (changed ? 1 : 0) && (!changed || ownsLock(id));
+    }
+    function historyMatches(d) {
+      let h = getAfter(/databases/$(database)/documents/history/$(d.historyId)).data;
+      return h.content == d.content && h.version == d.version && h.speechVersions == d.speechVersions && h.updatedAt == request.time && h.updatedBy == d.updatedBy;
+    }
+    function validHistory(h, id) {
+      let d = getAfter(/databases/$(database)/documents/published/content).data;
+      return h.keys().hasOnly(['content','version','speechVersions','updatedAt','updatedBy','reason'])
+        && h.reason in ['content','speech','restore'] && d.historyId == id
+        && h.version == d.version && h.content == d.content && h.speechVersions == d.speechVersions
+        && h.updatedAt == request.time && h.updatedAt == d.updatedAt && h.updatedBy == d.updatedBy
+        && participants(h.content);
+    }
+    match /published/content {
+      allow get: if true;
+      allow create: if admin() && valid(request.resource.data) && content(request.resource.data.content) && request.resource.data.version == 1
+        && request.resource.data.speechVersions == {'s0':0,'s1':0,'s2':0,'s3':0,'s4':0,'s5':0} && historyMatches(request.resource.data);
+      allow update: if admin() && valid(request.resource.data) && request.resource.data.version == resource.data.version + 1
+        && (request.resource.data.content.diff(resource.data.content).affectedKeys().hasOnly(['members','speeches']) || content(request.resource.data.content))
+        && request.resource.data.historyId != resource.data.historyId
+        && changeAllowed(0,'s0','0') && changeAllowed(1,'s1','1') && changeAllowed(2,'s2','2') && changeAllowed(3,'s3','3') && changeAllowed(4,'s4','4') && changeAllowed(5,'s5','5')
+        && historyMatches(request.resource.data);
+      allow delete: if false;
+    }
+    match /admins/{uid} {
+      allow get: if request.auth != null && request.auth.uid == uid;
+      allow list, write: if false;
+    }
+    match /editing/{id} {
+      allow read: if id in ['0','1','2','3','4','5'];
+      allow create, update: if admin() && id in ['0','1','2','3','4','5']
+        && request.resource.data.keys().hasOnly(['uid','name','sessionId','expiresAt','updatedAt'])
+        && request.resource.data.uid == request.auth.uid && request.resource.data.name == get(/databases/$(database)/documents/admins/$(request.auth.uid)).data.name
+        && request.resource.data.sessionId is string && request.resource.data.sessionId.size() > 0 && request.resource.data.sessionId.size() <= 100
+        && request.resource.data.updatedAt == request.time && request.resource.data.expiresAt is timestamp && request.resource.data.expiresAt > request.time && request.resource.data.expiresAt <= request.time + duration.value(35,'s')
+        && (!exists(/databases/$(database)/documents/editing/$(id)) || resource.data.expiresAt <= request.time || (resource.data.uid == request.auth.uid && resource.data.sessionId == request.resource.data.sessionId));
+      allow delete: if admin() && resource.data.uid == request.auth.uid;
+    }
+    match /history/{id} {
+      allow read: if admin();
+      allow create: if admin() && validHistory(request.resource.data, id);
+      allow update, delete: if false;
+    }
+    match /{document=**} { allow read, write: if false; }
+  }
+}
