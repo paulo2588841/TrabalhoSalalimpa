@@ -2,6 +2,8 @@
 
 O projeto Firebase `sala-limpa-10-32aef5` já foi criado. O banco Standard em São Paulo, as regras e o login por e-mail e senha estão configurados. O conteúdo inicial já está publicado, com as cinco contagens ainda não informadas.
 
+**Estado desta entrega:** Paulo e Maria já têm contas e permissões ativas; o responsável confirmou o login dos dois no painel. Paulo publicou a primeira versão do conteúdo. Os três domínios indicados abaixo também já foram autorizados e conferidos. As instruções seguintes são uma referência para manutenção ou configuração de outro projeto; não recrie contas nem permissões que já existem.
+
 As contas do painel são próprias do site. O login Google usado para configurar o Firebase identifica o responsável pelo projeto.
 
 ## 1. Criar as duas contas

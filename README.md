@@ -2,7 +2,7 @@
 
 Portal escolar sobre o cuidado com as salas do Ensino Fundamental. React, TypeScript, Vite, Tailwind CSS, Lucide, Recharts, Firebase Authentication e Firestore. Os nomes e as seis falas foram fornecidos pelo grupo; **Victor** é a grafia correta. Nenhum resultado de pesquisa é inventado.
 
-Este exemplar está conectado ao projeto Firebase `sala-limpa-10-32aef5`. O repositório é [paulo2588841/sala-limpa](https://github.com/paulo2588841/sala-limpa), e o endereço de publicação do workflow é [paulo2588841.github.io/sala-limpa](https://paulo2588841.github.io/sala-limpa/). Para ativar o acesso de Paulo e Maria, siga [ATIVAR_ADMINISTRADORES.md](ATIVAR_ADMINISTRADORES.md).
+Este exemplar está conectado ao projeto Firebase `sala-limpa-10-32aef5`. O repositório é [paulo2588841/sala-limpa](https://github.com/paulo2588841/sala-limpa), e o endereço de publicação do workflow é [paulo2588841.github.io/sala-limpa](https://paulo2588841.github.io/sala-limpa/). Paulo e Maria já têm acesso ativo ao painel, com login confirmado pelo responsável. O guia [ATIVAR_ADMINISTRADORES.md](ATIVAR_ADMINISTRADORES.md) documenta a manutenção dessas permissões.
 
 A [primeira publicação foi concluída e verificada](PUBLICACAO.md). O site usa o Firebase real; o comando `npm run demo` mantém uma prévia independente para testes locais.
 

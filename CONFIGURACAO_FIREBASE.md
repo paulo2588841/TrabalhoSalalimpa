@@ -1,8 +1,8 @@
 # Configuração do Firebase — SALA LIMPA 1.0
 
-**Este exemplar já tem o projeto real `sala-limpa-10-32aef5`, app Web, banco, regras e provedor de e-mail/senha configurados.** Para terminar o acesso do grupo, siga [ATIVAR_ADMINISTRADORES.md](ATIVAR_ADMINISTRADORES.md). As etapas abaixo permanecem como referência para recriar a configuração em outro projeto.
+**Este exemplar já tem o projeto real `sala-limpa-10-32aef5`, app Web, banco, regras, domínios autorizados e provedor de e-mail/senha configurados. Paulo e Maria já têm permissões ativas e confirmaram o acesso ao painel.** O guia [ATIVAR_ADMINISTRADORES.md](ATIVAR_ADMINISTRADORES.md) documenta a manutenção dos acessos. As etapas abaixo permanecem como referência para recriar a configuração em outro projeto.
 
-Esta etapa é feita pelo responsável pelo projeto. O repositório não contém contas, senhas, chaves privadas, tokens administrativos ou um projeto de produção pré-configurado. Firestore também fornece os indicadores de edição; não é necessário Realtime Database.
+Esta etapa é feita pelo responsável pelo projeto. O repositório identifica o projeto Firebase e contém sua configuração de publicação, mas não contém senhas de contas, chaves privadas ou tokens administrativos. A configuração pública do SDK está nas variáveis do GitHub Actions e, neste computador, no arquivo ignorado `.env.local`. Firestore também fornece os indicadores de edição; não é necessário Realtime Database.
 
 ## 1. Criar o projeto e o app Web
 
